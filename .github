@@ -1,1 +1,29 @@
-gjh
+name: Build ParkCommand APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Build the debug APK
+        working-directory: ParkCommand
+        run: chmod +x gradlew && ./gradlew assembleDebug
+
+      - name: Upload the APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: ParkCommand/app/build/outputs/apk/debug/app-debug.apk
