@@ -1,0 +1,40 @@
+name: Build PoolCommand APK
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+      - name: Build the debug APK
+        working-directory: PoolCommand
+        run: gradle assembleDebug --no-daemon
+      - name: Name the APK
+        run: cp PoolCommand/app/build/outputs/apk/debug/app-debug.apk PoolCommand.apk
+      - name: Upload the APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: PoolCommand-APK
+          path: PoolCommand.apk
+      - name: Publish a download link on the Releases page
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: PoolCommand APK (latest)
+          body: Open this page on your phone, tap PoolCommand.apk, then open the file to install. The version number is at the bottom of the More tab.
+          files: PoolCommand.apk
+          overwrite_files: true
