@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- Three flight strips -->
+    <path android:fillColor="#F3E3B5" android:pathData="M30,36h48v9h-48z"/>
+    <path android:fillColor="#2F9E5B" android:pathData="M30,36h5v9h-5z"/>
+    <path android:fillColor="#F3E3B5" android:pathData="M30,49.5h48v9h-48z"/>
+    <path android:fillColor="#E3A21A" android:pathData="M30,49.5h5v9h-5z"/>
+    <path android:fillColor="#CFE0F0" android:pathData="M30,63h48v9h-48z"/>
+    <path android:fillColor="#D64A3F" android:pathData="M30,63h5v9h-5z"/>
+</vector>
